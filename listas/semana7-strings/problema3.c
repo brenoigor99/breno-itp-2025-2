@@ -3,15 +3,15 @@
 
 int main()
 {
+    // Declara strings para armazenar o aluno buscado, as frequências e uma palavra auxiliar
     char aluno_buscado[11];
     char frequencias[1001];
     char palavra[11];
 
-    /*Leitura do nome do aluno*/
     scanf("%s", aluno_buscado);
-    getchar(); /*remove o \n que sobrou no buffer*/
+    getchar(); // remove o \n que sobrou no buffer
 
-    /*Lê a string das frequências até 1000 caracteres*/
+    // Lê a string das frequências até 1000 caracteres
     fgets(frequencias, 1001, stdin);
 
     int total_aulas = 0;
@@ -21,15 +21,15 @@ int main()
     int faltas;
     int i = 0;
 
-    /*Percorre a string extraindo cada palavra*/
+    // Percorre a string extraindo cada palavra
     while(frequencias[i] != '\0'){
-        /*Pula espaços e também quebras de linha*/
+        // Pula espaços e também quebras de linha
         while(frequencias[i] == ' ' || frequencias[i] == '\n'){
             i++;
         }
 
         int j = 0;
-        /*Copia a palavra atual*/
+        // Copia a palavra atual
         while(frequencias[i] != ' ' && frequencias[i] != '\n' && frequencias[i] != '\0'){
             palavra[j] = frequencias[i];
             i++;
@@ -38,20 +38,20 @@ int main()
         palavra[j] = '\0';
 
         if(j > 0){
-            /*Checa se é uma data (tem 5 caracteres e uma barra no meio)*/
+            // Checa se é uma data (tem 5 caracteres e uma barra no meio)
             if(strlen(palavra) == 5 && palavra[2] == '/'){
-                /*Se já tava em aula antes, precisa finalizar ela*/
+                //Se já tava em aula antes, precisa finalizar ela
                 if(em_aula && aluno_presente){
-                    aulas_presentes++; /*Conta mais uma presença*/
+                    aulas_presentes++; //Conta mais uma presença
                 }
-                /*Começa uma nova aula*/
+                // Começa uma nova aula
                 total_aulas++;
                 em_aula = 1;
                 aluno_presente = 0;
             }
-            /*Se não for data, então é o nome do aluno*/
+            // Se não for data, então é o nome do aluno
             else{
-                /*Verifica se é o aluno que buscamos*/
+                // Verifica se é o aluno que buscamos
                 if(strcmp(palavra, aluno_buscado) == 0){
                     aluno_presente = 1;
                 }
@@ -62,7 +62,7 @@ int main()
     if(em_aula && aluno_presente){
         aulas_presentes++;
     }
-    /*Calcula quantas faltas ele teve*/
+    // Calcula quantas faltas ele teve
     faltas = total_aulas - aulas_presentes;
 
     printf("%d\n", faltas);
