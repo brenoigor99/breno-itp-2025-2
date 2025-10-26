@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main() {
+int main() 
+{
     int m, n, i, j;
     int campo[10][10];
     int coberto[10][10];
@@ -12,7 +13,7 @@ int main() {
     // Lê o campo e inicializa matriz de cobertura
     for(i = 0; i < m; i++){
         for(j = 0; j < n; j++){
-            scanf("%1d", &campo[i][j]);
+            scanf("%d", &campo[i][j]);
             coberto[i][j] = 0;
         }
     }
