@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main() {
+int main() 
+{
     int m, usuario;
     int amizades[100][100];
     int sugestoes[100];
