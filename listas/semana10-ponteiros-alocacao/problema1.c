@@ -43,14 +43,13 @@ int main()
     for(i = 0; i < n2; i++){
         scanf("%d", &v[i]);
     }
-    
+
     // Verifica se as dimensões são compatíveis
     if(n1 != n2){
         printf("dimensoes incompativeis\n");
     }
     else{
         soma = somaVetores(u, v, n1);
-        
         // Imprime o resultado
         for(i = 0; i < n1; i++) {
             printf("%d", soma[i]);
