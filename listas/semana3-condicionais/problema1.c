@@ -10,9 +10,9 @@ int main()
     printf("Digite a sua altura em metros: \n");
     scanf("%f", &altura);
 
-    /*Declaração da variável IMC e cálculo do Índice de Massa Corporal*/
+    // Declaração da variável IMC e cálculo do Índice de Massa Corporal
     int IMC;
-    IMC = peso / (altura*altura); /*Fórmula: peso / altura²*/
+    IMC = peso / (altura*altura); // Fórmula: peso / altura²
 
     /*Cria uma conficional, no qual se o IMC for menor do que 18.5, irá dar output: "Abaixo do peso",
     caso o IMC fique entre 18.5 e 24.9, então irá dar output: "Peso normal", se estiver entre

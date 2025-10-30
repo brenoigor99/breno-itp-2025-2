@@ -4,20 +4,18 @@ int main()
 {
     int cont = 0;
     
-    /*Testa todas as combinações possíveis de posições das 4 rainhas*/
-    /*c0, c1, c2, c3 = coluna da rainha nas linhas 0, 1, 2, 3 respectivamente*/
+    // Testa todas as combinações possíveis de posições das 4 rainhas
+    // c0, c1, c2, c3 = coluna da rainha nas linhas 0, 1, 2, 3 respectivamente
     for (int c0 = 0; c0 < 4; c0++){
         for (int c1 = 0; c1 < 4; c1++){
             for (int c2 = 0; c2 < 4; c2++){
                 for (int c3 = 0; c3 < 4; c3++){ 
                     int valida = 1;
-                    
-                    /*verifica ataques na mesma coluna*/
+                    // Verifica ataques na mesma coluna
                     if (c0 == c1 || c0 == c2 || c0 == c3 || c1 == c2 || c1 == c3 || c2 == c3){
                         valida = 0;
                     }
-                    
-                    /*verifica ataques nas diagonais (diferença de colunas == diferença de linhas)*/
+                    // Verifica ataques nas diagonais (diferença de colunas == diferença de linhas)
                     if (c0 - c1 == 0 - 1 || c0 - c1 == 1 - 0){
                         valida = 0;
                     }
@@ -37,7 +35,7 @@ int main()
                         valida = 0;
                     } 
                     
-                    /*se passou em todas as validações, imprime a solução*/
+                    // Se passou em todas as validações, imprime a solução
                     if (valida){
                         cont++;
                         printf("Solução %d:\n", cont);

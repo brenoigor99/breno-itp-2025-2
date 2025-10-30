@@ -2,7 +2,7 @@
 
 void escrever_horario(int horas, int minutos, int formato){
 
-    /*normaliza minutos e horas para valores válidos*/
+    // Normaliza minutos e horas para valores válidos
     while(minutos >= 60){
         minutos = minutos - 60;
         horas = horas + 1;
@@ -10,12 +10,12 @@ void escrever_horario(int horas, int minutos, int formato){
     while(horas >= 24){
         horas = horas - 24;
     }
-    /*Formato 24h*/
+    // Formato 24h
     if(formato == 0){
         printf("%02d:%02d\n", horas, minutos);
 
     }
-    /*formato 12h (AM/PM)*/
+    // Formato 12h (AM/PM)
     else{
         if(horas == 0){
             printf("12:%02d AM\n", minutos);
@@ -38,7 +38,7 @@ int main()
 
     scanf("%d %d %d", &h, &m, &formato);
     
-    /*Exibe 5 horários diferentes com incrementos progressivos*/
+    // Exibe 5 horários diferentes com incrementos progressivos
     escrever_horario(h, m, formato);
     escrever_horario(h + 1, m + 0, formato);
     escrever_horario(h + 2, m + 10, formato);

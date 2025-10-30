@@ -21,13 +21,13 @@ int main()
     int melhor_i = 0;
     int melhor_j = 0;
 
-    /*busca a combinação que maximiza o uso do orçamento (minimiza o resto)*/
+    // Busca a combinação que maximiza o uso do orçamento (minimiza o resto)
     for(int i = 0; i <= 10; i++){
         for(int j = 0; j <= 10; j++){
             custo_total = i * preco1 + j * preco2;
             if(custo_total <= quantia){
                 resto = quantia - custo_total;
-                /*atualiza se encontrou combinação melhor*/
+                // Atualiza se encontrou combinação melhor
                 if(resto < menor_resto){
                 menor_resto = resto;
                 melhor_i = i;

@@ -19,10 +19,10 @@ int main()
         printf("Lançamentos %d: ", i + 1);
         scanf("%f %f", &x, &y);
 
-        /*calcula distância euclidiana do ponto até a origem*/
+        // Calcula distância euclidiana do ponto até a origem
         distancia_centro = sqrt((x*x) + (y*y));
 
-        /*pontuação baseada na distância ao centro*/
+        // Pontuação baseada na distância ao centro
         if(distancia_centro <= 1.0){
             pontuacao_principal = 10;
         }
@@ -38,11 +38,11 @@ int main()
 
         pontuacao_total = pontuacao_total + pontuacao_principal;
 
-        /*Calcula pontuação bônus a partir do segundo lançamento*/
+        // Calcula pontuação bônus a partir do segundo lançamento
         if(i > 0){
-            /*Calcula a distância entre o lançamento atual e o anterior*/
+            // Calcula a distância entre o lançamento atual e o anterior
             distancia_anterior = sqrt((x - x_anterior) * (x - x_anterior) + (y - y_anterior) * (y - y_anterior));
-            /*Determina a pontuação bônus baseada na proximidade com o lançamento anterior*/
+            // Determina a pontuação bônus baseada na proximidade com o lançamento anterior
             if(distancia_anterior <= 1.0){
                 pontuacao_bonus = 5;
             }
@@ -65,7 +65,7 @@ int main()
             printf("Primeiro lançamento - sem pontos\n");
         }
 
-        /*Armazena as coordenadas atuais para uso na próxima iteração*/
+        // Armazena as coordenadas atuais para uso na próxima iteração
         x_anterior = x;
         y_anterior = y;
     }

@@ -14,15 +14,15 @@ int main()
     int melhor_x = 0;
     int melhor_y = 0;
     
-    /*busca a melhor promoção "leve x pague y" que não dê prejuízo*/
+    // Busca a melhor promoção "leve x pague y" que não dê prejuízo
     for (int x = 2; x <= 10; x++){
         for (int y = 1; y < x; y++){
             float receita = y * p;
             float custo = x * q;
-            /*Verifica se a promoção não dá prejuízo (receita ≥ custo)*/
+            // Verifica se a promoção não dá prejuízo (receita ≥ custo)
             if (receita >= custo) {
                 float razao = (float)x / y;
-                /*Se esta promoção tem razão maior, atualiza a melhor opção*/
+                // Se esta promoção tem razão maior, atualiza a melhor opção
                 if (razao > melhor_razao) {
                     melhor_razao = razao;
                     melhor_x = x;

@@ -22,16 +22,16 @@ int main()
         printf("Informe as coordenadas do alvo: \n");
         scanf("%f %f", &ax, &ay);
         
-        /*Calcula a distância euclidiana entre a posição atual e o alvo*/
+        // Calcula a distância euclidiana entre a posição atual e o alvo
         distancia = sqrt((ax - x) * (ax - x) + (ay - y) * (ay - y));
 
         if(distancia <= comprimento_max){
-            /*Atualiza a posição do Homem-Aranha (balança até o alvo e continua na mesma direção)*/
+            // Atualiza a posição do Homem-Aranha (balança até o alvo e continua na mesma direção)
             x = 2*ax - x;
             y = y;
         }  
         else{
-            /*Se algum alvo está fora do alcance, não é possível completar a sequência*/
+            // Se algum alvo está fora do alcance, então não é possível completar a sequência
             printf("N\n");
             return 0;
         }

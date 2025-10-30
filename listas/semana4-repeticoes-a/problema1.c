@@ -14,7 +14,7 @@ int main()
     printf("Digite o comprimento do bolso: \n");
     scanf("%f", &comprimento_bolso);
     
-    /*Determina qual é o menor lado da folha*/
+    // Determina qual é o menor lado da folha
     float menor_lado;
     
     if(comprimento  <= largura){
@@ -26,16 +26,16 @@ int main()
 
     int dobras = 0;
     
-    /*Continua dobrando até que o menor lado caiba no bolso*/
+    // Continua dobrando até que o menor lado caiba no bolso
     while(menor_lado > comprimento_bolso){
-        /*Dobra sempre o maior lado pela metade*/
+        // Dobra sempre o maior lado pela metade
         if(comprimento >= largura){
             comprimento = comprimento/2;
         }
         else if(comprimento < largura){
             largura = largura/2;
         }
-        /*Atualiza qual é o menor lado após a dobra*/
+        // Atualiza qual é o menor lado após a dobra
         if(comprimento  <= largura){
             menor_lado = comprimento;
         }
