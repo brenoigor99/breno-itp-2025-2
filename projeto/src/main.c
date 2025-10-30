@@ -331,7 +331,7 @@ void calcular_estatisticas()
     printf("Alunos matriculados: %d\n", status.matriculados);
     printf("Idade média: %.1f anos\n", idade_media);
 
-    // Mostra distribuição por série (apenas séries que têm alunos)
+    // Mostra a distribuição por série (apenas séries que têm alunos)
     printf("\n ======== DISTRIBUIÇÃO POR SÉRIE ======== \n");
     for(int serie = 1; serie <= 9; serie++){
         int contar = contar_alunos_por_serie(serie);
