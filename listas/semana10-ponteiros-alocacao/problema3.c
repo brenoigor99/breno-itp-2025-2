@@ -12,7 +12,7 @@ char* misturar(char *str1, char *str2){
     // Aloca espaço pras duas strings juntas
     nova = (char*) malloc((t1 + t2 + 1) * sizeof(char));
     
-    // Descobre qual é a menor
+    // Descobre qual é a menor string
     if(t1 < t2){
         menor = t1;
     }
