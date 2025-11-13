@@ -35,7 +35,7 @@ Relatório completo com:
 - **Dados Gerais**: total de alunos, matriculados e idade média
 - **Distribuição por Série**: quantidade e percentual de alunos em cada série
 - **Distribuição por Turno**: alunos da manhã e tarde com percentuais
-- **Distribuição por Turma**: quantidade de alunos nas turmas A, B e C
+- **Distribuição por Turma**: quantidade de alunos nas turmas A ou B
 
 ## Estrutura do Código
 ```text

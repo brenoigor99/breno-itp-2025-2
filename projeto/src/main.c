@@ -4,6 +4,8 @@
 #define Max_alunos 100
 #define Tam_nome 50
 #define Tam_responsavel 50
+#define MAX_SERIES 9
+#define MAX_TURMAS 2
 
 // Estrutura principal que armazena todos os dados de cada aluno
 typedef struct 
@@ -24,6 +26,10 @@ typedef struct
 Aluno alunos[Max_alunos];
 int total_alunos = 0;
 
+// MATRIZ DE DISTRIBUIÇÃO - Organiza alunos por série e turma
+// Linhas = séries (1ª a 9ª) | Colunas = turmas (A=0, B=1)
+int distribuicao_turmas[MAX_SERIES][MAX_TURMAS];
+
 typedef struct 
 {
     int matriculados;
@@ -35,6 +41,79 @@ typedef struct
     int manha;
     int tarde;
 }contagem_turnos;
+
+// Inicializa a matriz com zeros
+void inicializar_matriz()
+{
+    for(int i = 0; i < MAX_SERIES; i++){
+        for(int j = 0; j < MAX_TURMAS; j++){
+            distribuicao_turmas[i][j] = 0;
+        }
+    }
+}
+
+// Atualiza a matriz sempre que um aluno é adicionado
+void atualizar_matriz()
+{
+    // Zera a matriz
+    inicializar_matriz();
+    
+    // Reconta todos os alunos ativos
+    for(int i = 0; i < total_alunos; i++){
+        if(alunos[i].ativo == 1){
+            int serie_index = alunos[i].serie - 1; // Converte série 1-9 para índice 0-8
+            int turma_index = (alunos[i].turma == 'A') ? 0 : 1; // A=0, B=1
+            
+            distribuicao_turmas[serie_index][turma_index]++;
+        }
+    }
+}
+
+// Exibe a matriz de distribuição em formato de tabela
+void exibir_matriz_distribuicao()
+{
+    printf("\n ======== MATRIZ DE DISTRIBUIÇÃO (Série x Turma) ======== \n\n");
+    
+    if(total_alunos == 0){
+        printf("Nenhum aluno matriculado ainda.\n");
+        return;
+    }
+    
+    // Atualiza a matriz antes de exibir
+    atualizar_matriz();
+    
+    // Cabeçalho da tabela
+    printf("Série | Turma A | Turma B | Total\n");
+    printf("------|---------|---------|-------\n");
+    
+    int total_geral = 0;
+    
+    // Percorre cada série
+    for(int i = 0; i < MAX_SERIES; i++){
+        int turma_a = distribuicao_turmas[i][0];
+        int turma_b = distribuicao_turmas[i][1];
+        int total_serie = turma_a + turma_b;
+        
+        // Só exibe séries que têm alunos
+        if(total_serie > 0){
+            printf("  %dª  |   %2d    |   %2d    |  %2d\n", 
+                   i + 1, turma_a, turma_b, total_serie);
+            total_geral += total_serie;
+        }
+    }
+    
+    printf("------|---------|---------|-------\n");
+    printf("TOTAL |   %2d    |   %2d    |  %2d\n", 
+           distribuicao_turmas[0][0] + distribuicao_turmas[1][0] + distribuicao_turmas[2][0] + 
+           distribuicao_turmas[3][0] + distribuicao_turmas[4][0] + distribuicao_turmas[5][0] + 
+           distribuicao_turmas[6][0] + distribuicao_turmas[7][0] + distribuicao_turmas[8][0],
+           
+           distribuicao_turmas[0][1] + distribuicao_turmas[1][1] + distribuicao_turmas[2][1] + 
+           distribuicao_turmas[3][1] + distribuicao_turmas[4][1] + distribuicao_turmas[5][1] + 
+           distribuicao_turmas[6][1] + distribuicao_turmas[7][1] + distribuicao_turmas[8][1],
+           
+           total_geral);
+}
 
 // Define turma automaticamente baseada no turno: Manhã = A, Tarde = B
 char definir_Turma_Automaticamente(int serie, char turno){
@@ -74,6 +153,9 @@ int adicionar_aluno(Aluno novo_aluno){
     // Busca aluno por matrícula - retorna índice se encontrou ou -1 se não encontrar
     alunos[total_alunos] = novo_aluno;
     total_alunos++;
+    
+    // Atualiza a matriz após adicionar
+    atualizar_matriz();
 
     return 1;
 }
@@ -149,7 +231,7 @@ contagem_turnos contar_alunos_por_turno()
     }
     return contagem;
 }
-// Conta quantos alunos pertencem a uma turma específica (A, B ou C)
+// Conta quantos alunos pertencem a uma turma específica (A ou B)
 int contar_alunos_por_turma(char turma)
 {
     int cont = 0;
@@ -347,7 +429,6 @@ void calcular_estatisticas()
     printf("\n ======== DISTRIBUIÇÃO POR TURMA ======== \n");
     int turmaA = contar_alunos_por_turma('A');
     int turmaB = contar_alunos_por_turma('B');
-    int turmaC = contar_alunos_por_turma('C');
 
     if(turmaA > 0){
         printf("Turma A: %d alunos\n", turmaA);
@@ -355,14 +436,17 @@ void calcular_estatisticas()
     if(turmaB > 0){
         printf("Turma B: %d alunos\n", turmaB);
     }
-    if(turmaC > 0){
-        printf("Turma C: %d alunos\n", turmaC);
-    }
+    
+    // EXIBE A MATRIZ DE DISTRIBUIÇÃO
+    exibir_matriz_distribuicao();
 }
 
 int main()
 {
     int opcao;
+    
+    // Inicializa a matriz no início do programa
+    inicializar_matriz();
 
     printf("========================================\n");
     printf("SISTEMA DE CADASTRO ESCOLAR\n");
@@ -376,6 +460,7 @@ int main()
         printf("2 - Listar Alunos Matriculados\n");
         printf("3 - Buscar Alunos\n");
         printf("4 - Estatísticas da Escola\n");
+        printf("5 - Ver Matriz de Distribuição\n");
         printf("0 - Sair do Sistema\n");
         printf("==================================\n");
 
@@ -398,11 +483,14 @@ int main()
         case 4:
             calcular_estatisticas();
             break;
+        case 5:
+            exibir_matriz_distribuicao();
+            break;
         case 0:
             printf("Obrigado por usar nosso sistema!\n");
             break;
         default:
-            printf("\nErro! Opção inválida. Digite 1, 2, 3, 4 ou 0\n");
+            printf("\nErro! Opção inválida. Digite 1, 2, 3, 4, 5 ou 0\n");
         }
         // Pausa para o usuário visualizar os resultados
         if(opcao != 0){
