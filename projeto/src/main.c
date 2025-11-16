@@ -262,6 +262,7 @@ int adicionar_aluno(Aluno novo_aluno){
 
     return 1;
 }
+
 // Busca aluno por matrícula - retorna índice se encontrou ou -1 se não encontrar
 int buscar_aluno_matriculado(int busca_matricula)
 {
@@ -272,6 +273,7 @@ int buscar_aluno_matriculado(int busca_matricula)
     }
     return -1; // Não encontrou
 }
+
 // Conta alunos ativos e transferidos
 status_aluno contar_status()
 {
@@ -290,6 +292,7 @@ status_aluno contar_status()
     }
     return status;
 }
+
 // Calcula a idade média dos alunos matriculados
 float calcular_idade_media()
 {
@@ -304,6 +307,7 @@ float calcular_idade_media()
     // Converte para float para obter média com decimais
     return (float)soma_idades / total_alunos;
 }
+
 // Conta quantos alunos estão matriculados em uma série específica
 int contar_alunos_por_serie(int serie)
 {
@@ -316,6 +320,7 @@ int contar_alunos_por_serie(int serie)
     }
     return cont;
 }
+
 // Retorna a quantidade de alunos em cada turno (manhã e tarde)
 contagem_turnos contar_alunos_por_turno()
 {
@@ -334,6 +339,7 @@ contagem_turnos contar_alunos_por_turno()
     }
     return contagem;
 }
+
 // Conta quantos alunos pertencem a uma turma específica (A ou B)
 int contar_alunos_por_turma(char turma)
 {
@@ -345,6 +351,7 @@ int contar_alunos_por_turma(char turma)
     }
     return cont;
 }
+
 // Função de cadastro - coleta os dados do aluno e valida as entradas
 void cadastro_alunos()
     {
@@ -421,6 +428,7 @@ void cadastro_alunos()
             printf("A escola só aceita alunos de 6 a 14 anos.\n");
         }
     }
+
 // Função para exibir todos os alunos em formato de tabela com resumo estatístico
 void listar_alunos()
     {
@@ -455,6 +463,7 @@ void listar_alunos()
            total_alunos, status.matriculados, status.transferidos);
         printf("Idade média: %.1f anos\n", calcular_idade_media());
     }
+
 // Função para buscar os alunos no sistema
 void buscar_alunos()
 {
@@ -510,6 +519,7 @@ void buscar_alunos()
         printf("Opção inválida!\n");
     }
 }
+
 // Essa função gera relatório completo com todas as estatísticas da escola
 void calcular_estatisticas()
 {
