@@ -25,9 +25,10 @@ Este é um sistema completo de cadastro e gerenciamento de alunos do ensino fund
   - Idade média
 
 ### 3. Buscar Alunos
-- Busca por número de matrícula
-- Busca por série e turma
-- Busca por turno
+- **Busca por número de matrícula**: localiza aluno específico pelo número da matrícula
+- **Busca por nome**: encontra aluno pelo nome completo
+- **Busca por série e turma**: lista todos os alunos de uma turma específica (ex: 5ªA, 7ªB)
+- **Busca por turno**: exibe alunos do turno da manhã ou tarde, organizados por série
 - Exibição detalhada dos dados do aluno encontrado
 
 ### 4. Estatísticas da Escola
@@ -36,13 +37,21 @@ Relatório completo com:
 - **Distribuição por Série**: quantidade e percentual de alunos em cada série
 - **Distribuição por Turno**: alunos da manhã e tarde com percentuais
 - **Distribuição por Turma**: quantidade de alunos nas turmas A ou B
+- **Matriz de Distribuição**: visualização em formato de tabela cruzada mostrando a quantidade de alunos por série e turma
+
+### 5. Ver Matriz de Distribuição
+- Matriz visual organizada por série (linhas) e turma (colunas)
+- Mostra a distribuição completa de alunos ativos
+- Totalização por série, turma e geral
+- Atualização automática sempre que um aluno é matriculado
 
 ## Estrutura do Código
 ```text
 ├── Estruturas de Dados
 │   ├── Aluno (struct principal)
 │   ├── status_aluno (estatísticas de status)
-│   └── contagem_turnos (estatísticas de turnos)
+│   ├── contagem_turnos (estatísticas de turnos)
+│   └── distribuicao_turmas (matriz de distribuição)
 │
 ├── Funções de Validação
 │   ├── validar_idade()
@@ -52,6 +61,9 @@ Relatório completo com:
 ├── Funções de Cadastro e Busca
 │   ├── adicionar_aluno()
 │   ├── buscar_aluno_matriculado()
+│   ├── buscar_por_nome()
+│   ├── buscar_por_serie_turma()
+│   ├── buscar_por_turno()
 │   └── cadastro_alunos()
 │
 ├── Funções de Estatísticas
@@ -61,11 +73,17 @@ Relatório completo com:
 │   ├── contar_alunos_por_turno()
 │   └── contar_alunos_por_turma()
 │
+├── Funções de Matriz
+│   ├── inicializar_matriz()
+│   ├── atualizar_matriz()
+│   └── exibir_matriz_distribuicao()
+│
 └── Funções de Exibição
     ├── listar_alunos()
     ├── buscar_alunos()
     └── calcular_estatisticas()
 ```
+
 ## Como compilar
 
 ### Linux/macOS:
@@ -86,6 +104,7 @@ sistema_escolar.exe
 2 - Listar todos os alunos
 3 - Buscar aluno
 4 - Ver estatísticas
+5 - Ver matriz de distribuição
 0 - Sair
 ```
 ## Tecnologias
