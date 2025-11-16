@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define Max_alunos 100
 #define Tam_nome 50
@@ -41,6 +42,108 @@ typedef struct
     int manha;
     int tarde;
 }contagem_turnos;
+
+// Busca aluno pelo nome completo usando strcmp
+// Recebe ponteiro para array de alunos e total cadastrado
+void buscar_por_nome(Aluno *lista, int total)
+{
+    char nome[Tam_nome];
+    int encontrou = 0;
+    
+    printf("Digite o nome completo do aluno: ");
+    getchar();
+    scanf("%49[^\n]", nome);
+    
+    printf("\n");
+    
+    // Percorre array comparando nomes
+    for(int i = 0; i < total; i++){
+        // strcmp retorna 0 quando strings são iguais
+        if(strcmp(lista[i].nome, nome) == 0){
+            printf("Aluno encontrado:\n");
+            printf("Nome: %s\n", lista[i].nome);
+            printf("Matrícula: %d\n", lista[i].matricula);
+            printf("Idade: %d anos\n", lista[i].idade);
+            printf("Turma: %d%c - Turno: %c\n", lista[i].serie, lista[i].turma, lista[i].turno);
+            printf("Responsável: %s (Tel: %04d)\n", lista[i].responsavel, lista[i].telefone);
+            printf("\n");
+            encontrou = 1;
+            break;
+        }
+    }
+    
+    if(!encontrou){
+        printf("Aluno não encontrado. Verifique se digitou o nome completo.\n");
+    }
+}
+
+// Busca e lista alunos de uma série e turma específica
+// Útil para visualizar todos os alunos de uma sala
+void buscar_por_serie_turma(Aluno *lista, int total)
+{
+    int serie;
+    char turma;
+    int contador = 0;
+    
+    printf("Digite a série (1 a 9): ");
+    scanf("%d", &serie);
+    
+    printf("Digite a turma (A ou B): ");
+    scanf(" %c", &turma);
+    
+    printf("\n========= Alunos da %dª série - Turma %c =========\n", serie, turma);
+    
+    for(int i = 0; i < total; i++){
+        if(lista[i].serie == serie && lista[i].turma == turma){
+            printf("%d. %s (Matrícula: %d)\n", contador + 1, lista[i].nome, lista[i].matricula);
+            contador++;
+        }
+    }
+    
+    if(contador == 0){
+        printf("Nenhum aluno encontrado nessa turma.\n");
+    }
+    else{
+        printf("\nTotal de alunos: %d\n", contador);
+    }
+}
+
+// Lista alunos por turno, organizando por série
+// Facilita visualização da distribuição dos turnos
+void buscar_por_turno(Aluno *lista, int total)
+{
+    char turno;
+    int contador = 0;
+    
+    printf("Digite o turno (M para Manhã / T para Tarde): ");
+    scanf(" %c", &turno);
+    
+    printf("\n========= Alunos do turno da %s =========\n", 
+           turno == 'M' ? "Manhã" : "Tarde");
+    
+    // Organiza listagem por série (1 a 9)
+    for(int serie = 1; serie <= 9; serie++){
+        int tem_aluno_serie = 0;
+        
+        for(int i = 0; i < total; i++){
+            if(lista[i].turno == turno && lista[i].serie == serie){
+                if(!tem_aluno_serie){
+                    printf("\n%dª Série:\n", serie);
+                    tem_aluno_serie = 1;
+                }
+                printf("  - %s (Turma %c)\n", lista[i].nome, lista[i].turma);
+                contador++;
+            }
+        }
+    }
+    
+    if(contador == 0){
+        printf("Nenhum aluno encontrado nesse turno.\n");
+    }
+    else{
+        printf("\nTotal de alunos no turno: %d\n", contador);
+    }
+}
 
 // Inicializa a matriz com zeros
 void inicializar_matriz()
@@ -366,7 +469,7 @@ void buscar_alunos()
     printf("Como deseja buscar?\n");
     printf("1 - Por número da matrícula\n");
     printf("2 - Por nome\n");
-    printf("3 - Por série e turmas\n");
+    printf("3 - Por série e turma\n");
     printf("4 - Por turno\n");
     printf("Opção: ");
     scanf("%d", &opcao_busca);
@@ -392,6 +495,19 @@ void buscar_alunos()
         else{
             printf("Aluno não encontrado.\n");
         }
+    }
+    // Chama as novas funções de busca passando o array como ponteiro
+    else if(opcao_busca == 2){
+        buscar_por_nome(alunos, total_alunos);
+    }
+    else if(opcao_busca == 3){
+        buscar_por_serie_turma(alunos, total_alunos);
+    }
+    else if(opcao_busca == 4){
+        buscar_por_turno(alunos, total_alunos);
+    }
+    else{
+        printf("Opção inválida!\n");
     }
 }
 // Essa função gera relatório completo com todas as estatísticas da escola
