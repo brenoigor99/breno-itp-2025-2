@@ -164,10 +164,10 @@ void atualizar_matriz()
     // Reconta todos os alunos ativos
     for(int i = 0; i < total_alunos; i++){
         if(alunos[i].ativo == 1){
-            int serie_index = alunos[i].serie - 1; // Converte série 1-9 para índice 0-8
-            int turma_index = (alunos[i].turma == 'A') ? 0 : 1; // A=0, B=1
+            int ind_serie = alunos[i].serie - 1; // Converte série 1-9 para índice 0-8
+            int ind_turma = (alunos[i].turma == 'A') ? 0 : 1; // A=0, B=1
             
-            distribuicao_turmas[serie_index][turma_index]++;
+            distribuicao_turmas[ind_serie][ind_turma]++;
         }
     }
 }
