@@ -166,7 +166,7 @@ void atualizar_matriz()
         if(alunos[i].ativo == 1){
             int ind_serie = alunos[i].serie - 1; // Converte série 1-9 para índice 0-8
             int ind_turma = (alunos[i].turma == 'A') ? 0 : 1; // A=0, B=1
-            
+
             distribuicao_turmas[ind_serie][ind_turma]++;
         }
     }
@@ -227,14 +227,17 @@ char definir_Turma_Automaticamente(int serie, char turno){
         return 'B';
     }
 }
+
 // Valida a idade para o ensino fundamental (6 a 14 anos)
 int validar_idade(int idade){
     return (idade >= 6 && idade <= 14);
 }
+
 // Verifica se há vagas dispiníveis no sistema
 int tem_vagas(){
     return total_alunos < Max_alunos;
 }
+
 // Adiciona o aluno ao sistema. Retorna: 1 = sucesso, 0 = erro e -1 = inválido
 int adicionar_aluno(Aluno novo_aluno){
     if(!tem_vagas()){
