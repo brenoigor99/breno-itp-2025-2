@@ -10,7 +10,7 @@
 **Descrição**: Este é um sistema completo de cadastro e gerenciamento de alunos do ensino fundamental.  
 **Repositório**: https://github.com/brenoigor99/breno-itp-2025-2.git   
 **Vídeo de Demonstração**: [link para o vídeo da U1](https://youtu.be/rFKDheTI-2Q)  
-**Vídeo de Demonstração**: [link para o vídeo da U2](https://youtu.be/RKiCUzParpc)  
+**Vídeo de Demonstração**: [link para o vídeo da U2](https://www.youtube.com/watch?v=8dd55EPjYq0)  
 ### Funcionalidades Implementadas:
 - O sistema permite matricular alunos, listar cadastros, realizar buscas, ver matriz de distribuição e gerar relatórios estatísticos.
 ### Conceitos da U1 Aplicados:
